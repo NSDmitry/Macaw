@@ -124,6 +124,9 @@ public extension Locus {
         return RenderUtils.toCGPath(self)
     }
 
+    func toBezierPath() -> MBezierPath {
+        return RenderUtils.toBezierPath(self)
+    }
 }
 
 public extension CGAffineTransform {
