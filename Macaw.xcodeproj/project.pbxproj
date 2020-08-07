@@ -496,6 +496,8 @@
 		5BFEF5D720BC1C1F008DAC11 /* paths-data-18-f-manual.reference in Resources */ = {isa = PBXBuildFile; fileRef = 5BFEF5D520BC1C1F008DAC11 /* paths-data-18-f-manual.reference */; };
 		6A616BFA2129560A006A07FA /* MacawTests.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6A616BF92129560A006A07FA /* MacawTests.bundle */; };
 		6A616BFC212964E8006A07FA /* SVGParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A616BFB212964E8006A07FA /* SVGParserTest.swift */; };
+		84C49A3B24DD877000417700 /* MacawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C49A3924DD877000417700 /* MacawView.swift */; };
+		84C49A3C24DD877000417700 /* MacawZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C49A3A24DD877000417700 /* MacawZoom.swift */; };
 		A718CD441F45C28200966E06 /* Common_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718CD431F45C28200966E06 /* Common_iOS.swift */; };
 		A718CD471F45C28700966E06 /* Graphics_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718CD451F45C28700966E06 /* Graphics_iOS.swift */; };
 		A718CD481F45C28700966E06 /* MView_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718CD461F45C28700966E06 /* MView_iOS.swift */; };
@@ -908,6 +910,8 @@
 		5BFEF5D520BC1C1F008DAC11 /* paths-data-18-f-manual.reference */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "paths-data-18-f-manual.reference"; sourceTree = "<group>"; };
 		6A616BF92129560A006A07FA /* MacawTests.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MacawTests.bundle; sourceTree = "<group>"; };
 		6A616BFB212964E8006A07FA /* SVGParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGParserTest.swift; sourceTree = "<group>"; };
+		84C49A3924DD877000417700 /* MacawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacawView.swift; sourceTree = "<group>"; };
+		84C49A3A24DD877000417700 /* MacawZoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacawZoom.swift; sourceTree = "<group>"; };
 		A718CD431F45C28200966E06 /* Common_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Common_iOS.swift; path = Source/platform/iOS/Common_iOS.swift; sourceTree = SOURCE_ROOT; };
 		A718CD451F45C28700966E06 /* Graphics_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Graphics_iOS.swift; path = Source/platform/iOS/Graphics_iOS.swift; sourceTree = SOURCE_ROOT; };
 		A718CD461F45C28700966E06 /* MView_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MView_iOS.swift; path = Source/platform/iOS/MView_iOS.swift; sourceTree = SOURCE_ROOT; };
@@ -1288,6 +1292,8 @@
 		57E5E14F1E3B393900D1CB28 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				84C49A3924DD877000417700 /* MacawView.swift */,
+				84C49A3A24DD877000417700 /* MacawZoom.swift */,
 				57F108731F502A3600DC365B /* Touchable.swift */,
 				57E5E1501E3B393900D1CB28 /* MacawView.swift */,
 				57E5E1521E3B393900D1CB28 /* ShapeLayer.swift */,
@@ -2146,6 +2152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84C49A3B24DD877000417700 /* MacawView.swift in Sources */,
 				57E5E19E1E3B393900D1CB28 /* Group.swift in Sources */,
 				57E5E1A91E3B393900D1CB28 /* TextRenderer.swift in Sources */,
 				57E5E1B01E3B393900D1CB28 /* CGFloat+Double.swift in Sources */,
@@ -2162,6 +2169,7 @@
 				57E5E1531E3B393900D1CB28 /* AnimatableVariable.swift in Sources */,
 				5B6E193B20AC58F900454E7E /* Effect.swift in Sources */,
 				57E5E1631E3B393900D1CB28 /* AnimationCache.swift in Sources */,
+				84C49A3C24DD877000417700 /* MacawZoom.swift in Sources */,
 				57E5E19D1E3B393900D1CB28 /* Transform.swift in Sources */,
 				A718CD4E1F45C28F00966E06 /* Graphics_macOS.swift in Sources */,
 				57E5E1A81E3B393900D1CB28 /* ShapeRenderer.swift in Sources */,
