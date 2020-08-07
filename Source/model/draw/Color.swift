@@ -60,7 +60,11 @@ open class Color: Fill {
         return rgbt( r: r, g: g, b: b, t: 0 )
     }
 
-    func equals(other: Color) -> Bool {
+    override func equals<T>(other: T) -> Bool where T: Fill {
+        guard let other = other as? Self else {
+            return false
+        }
+
         return val == other.val
     }
 }
