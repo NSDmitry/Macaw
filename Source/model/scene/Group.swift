@@ -57,7 +57,7 @@ open class Group: Node {
     override open var bounds: Rect? {
         let bounds = BoundsUtils.getNodesBounds(contents)
         if let bounds = bounds?.toCG(),
-            let clip = self.clip?.bounds().toCG() {
+           let clip = self.clip?.bounds().toCG() {
             let newX = max(bounds.minX, clip.minX)
             let newY = max(bounds.minY, clip.minY)
             return Rect(Double(newX), Double(newY),

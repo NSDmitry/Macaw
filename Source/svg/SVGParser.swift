@@ -273,9 +273,9 @@ open class SVGParser {
             }
 
             if let result = result,
-                let filterString = style["filter"],
-                let filterId = parseIdFromUrl(filterString),
-                let effect = defEffects[filterId] {
+               let filterString = style["filter"],
+               let filterId = parseIdFromUrl(filterString),
+               let effect = defEffects[filterId] {
                 result.effect = effect
             }
         }
@@ -446,7 +446,7 @@ open class SVGParser {
 
         var parentPattern: UserSpacePattern?
         if let link = element.allAttributes["xlink:href"]?.text.replacingOccurrences(of: " ", with: ""),
-            link.hasPrefix("#") {
+           link.hasPrefix("#") {
             let id = link.replacingOccurrences(of: "#", with: "")
             parentPattern = defPatterns[id]
         }
@@ -465,14 +465,14 @@ open class SVGParser {
         if let units = element.allAttributes["patternContentUnits"]?.text, units == "objectBoundingBox" {
             contentUserSpace = false
         }
-        
+
         var contentNode: Node?
         if pattern.children.isEmpty {
             if let parentPattern = parentPattern {
                 contentNode = parentPattern.content
             }
         } else if pattern.children.count == 1,
-            let shape = try parseNode(pattern.children.first!) as? Shape {
+                  let shape = try parseNode(pattern.children.first!) as? Shape {
             contentNode = shape
         } else {
             var shapes = [Shape]()
@@ -483,7 +483,7 @@ open class SVGParser {
             }
             contentNode = Group(contents: shapes)
         }
-        
+
         return UserSpacePattern(content: contentNode!,
                                 bounds: bounds,
                                 userSpace: userSpace,
@@ -591,8 +591,8 @@ open class SVGParser {
                     return transform
                 }
                 if let m11 = Double(values[0]), let m12 = Double(values[1]),
-                    let m21 = Double(values[2]), let m22 = Double(values[3]),
-                    let dx = Double(values[4]), let dy = Double(values[5]) {
+                   let m21 = Double(values[2]), let m22 = Double(values[3]),
+                   let dx = Double(values[4]), let dy = Double(values[5]) {
 
                     let transformMatrix = Transform(m11: m11, m12: m12, m21: m21, m22: m22, dx: dx, dy: dy)
                     finalTransform = transform.concat(with: transformMatrix)
@@ -911,10 +911,10 @@ open class SVGParser {
 
     fileprivate func parseRect(_ rect: XMLIndexer) -> Locus? {
         guard let element = rect.element,
-            let width = getDoubleValue(element, attribute: "width"),
-            let height = getDoubleValue(element, attribute: "height"), width > 0 && height > 0 else {
+              let width = getDoubleValue(element, attribute: "width"),
+              let height = getDoubleValue(element, attribute: "height"), width > 0 && height > 0 else {
 
-                return .none
+            return .none
         }
 
         let resultRect = Rect(x: getDoubleValue(element, attribute: "x") ?? 0,
@@ -946,9 +946,9 @@ open class SVGParser {
 
     fileprivate func parseEllipse(_ ellipse: XMLIndexer) -> Arc? {
         guard let element = ellipse.element,
-            let rx = getDoubleValue(element, attribute: "rx"),
-            let ry = getDoubleValue(element, attribute: "ry"), rx > 0 && ry > 0 else {
-                return .none
+              let rx = getDoubleValue(element, attribute: "rx"),
+              let ry = getDoubleValue(element, attribute: "ry"), rx > 0 && ry > 0 else {
+            return .none
         }
         return Arc(
             ellipse: Ellipse(cx: getDoubleValue(element, attribute: "cx") ?? 0,
@@ -1128,29 +1128,29 @@ open class SVGParser {
             let tspanString = fullString.substring(to: closingTagRange.location + closingTagRange.length)
             let tspanXml = SWXMLHash.parse(tspanString)
             guard let indexer = tspanXml.children.first,
-                let text = parseTspan(indexer,
-                                      withWhitespace: withWhitespace,
-                                      textAnchor: textAnchor,
-                                      fill: fill,
-                                      stroke: stroke,
-                                      opacity: opacity,
-                                      fontName: fontName,
-                                      fontSize: fontSize,
-                                      fontWeight: fontWeight,
-                                      bounds: bounds,
-                                      previousCollectedTspan: collection.last) else {
+                  let text = parseTspan(indexer,
+                                        withWhitespace: withWhitespace,
+                                        textAnchor: textAnchor,
+                                        fill: fill,
+                                        stroke: stroke,
+                                        opacity: opacity,
+                                        fontName: fontName,
+                                        fontSize: fontSize,
+                                        fontWeight: fontWeight,
+                                        bounds: bounds,
+                                        previousCollectedTspan: collection.last) else {
 
-                                        // skip this element if it can't be parsed
-                                        return collectTspans(fullString.substring(from: closingTagRange.location + closingTagRange.length),
-                                                             collectedTspans: collectedTspans,
-                                                             textAnchor: textAnchor,
-                                                             fill: fill,
-                                                             stroke: stroke,
-                                                             opacity: opacity,
-                                                             fontName: fontName,
-                                                             fontSize: fontSize,
-                                                             fontWeight: fontWeight,
-                                                             bounds: bounds)
+                // skip this element if it can't be parsed
+                return collectTspans(fullString.substring(from: closingTagRange.location + closingTagRange.length),
+                                     collectedTspans: collectedTspans,
+                                     textAnchor: textAnchor,
+                                     fill: fill,
+                                     stroke: stroke,
+                                     opacity: opacity,
+                                     fontName: fontName,
+                                     fontSize: fontSize,
+                                     fontWeight: fontWeight,
+                                     bounds: bounds)
             }
             collection.append(text)
             let nextString = fullString.substring(from: closingTagRange.location + closingTagRange.length) as NSString
@@ -1405,7 +1405,7 @@ open class SVGParser {
             switch element.name {
             case "feOffset":
                 if let dx = getDoubleValue(element, attribute: "dx"),
-                    let dy = getDoubleValue(element, attribute: "dy") {
+                   let dy = getDoubleValue(element, attribute: "dy") {
                     resultingEffect = OffsetEffect(dx: dx, dy: dy, input: currentEffect)
                 }
             case "feGaussianBlur":
@@ -1459,7 +1459,7 @@ open class SVGParser {
 
         var parentGradient: Gradient?
         if let link = element.allAttributes["xlink:href"]?.text.replacingOccurrences(of: " ", with: ""),
-            link.hasPrefix("#") {
+           link.hasPrefix("#") {
 
             let id = link.replacingOccurrences(of: "#", with: "")
             parentGradient = defFills[id] as? Gradient
@@ -1521,7 +1521,7 @@ open class SVGParser {
 
         var parentGradient: Gradient?
         if let link = element.allAttributes["xlink:href"]?.text.replacingOccurrences(of: " ", with: ""),
-            link.hasPrefix("#") {
+           link.hasPrefix("#") {
 
             let id = link.replacingOccurrences(of: "#", with: "")
             parentGradient = defFills[id] as? Gradient
@@ -1599,7 +1599,7 @@ open class SVGParser {
         guard let element = stop.element else {
             return .none
         }
-        
+
         var offset: Double = 0 // This is default value, value can be omitted
         if let parsedOffset = getDoubleValueFromPercentage(element, attribute: "offset") {
             offset = parsedOffset
@@ -1607,7 +1607,7 @@ open class SVGParser {
 
         var opacity: Double = 1
         if let stopOpacity = getStyleAttributes([:], element: element)["stop-opacity"],
-            let doubleValue = Double(stopOpacity) {
+           let doubleValue = Double(stopOpacity) {
             opacity = doubleValue
         }
         var color = Color.black.with(a: opacity)
