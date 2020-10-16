@@ -1,6 +1,6 @@
 internal class OpacityAnimation: AnimationImpl<Double> {
 
-    convenience init(animatedNode: Node, startValue: Double, finalValue: Double, animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
+    convenience init(animatedNode: MacawNode, startValue: Double, finalValue: Double, animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
 
         let interpolationFunc = { (t: Double) -> Double in
             startValue.interpolate(finalValue, progress: t)
@@ -9,7 +9,7 @@ internal class OpacityAnimation: AnimationImpl<Double> {
         self.init(animatedNode: animatedNode, valueFunc: interpolationFunc, animationDuration: animationDuration, delay: delay, autostart: autostart, fps: fps)
     }
 
-    init(animatedNode: Node, valueFunc: @escaping (Double) -> Double, animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
+    init(animatedNode: MacawNode, valueFunc: @escaping (Double) -> Double, animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
         super.init(observableValue: animatedNode.opacityVar, valueFunc: valueFunc, animationDuration: animationDuration, delay: delay, fps: fps)
         type = .opacity
         node = animatedNode
@@ -19,7 +19,7 @@ internal class OpacityAnimation: AnimationImpl<Double> {
         }
     }
 
-    init(animatedNode: Node, factory: @escaping  (() -> ((Double) -> Double)), animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
+    init(animatedNode: MacawNode, factory: @escaping  (() -> ((Double) -> Double)), animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
         super.init(observableValue: animatedNode.opacityVar, factory: factory, animationDuration: animationDuration, delay: delay, fps: fps)
         type = .opacity
         node = animatedNode

@@ -4,7 +4,7 @@ open class PanEvent: Event {
     public let dy: Double
     public let count: Int
 
-    init(node: Node, dx: Double, dy: Double, count: Int) {
+    init(node: MacawNode, dx: Double, dy: Double, count: Int) {
         self.dx = dx
         self.dy = dy
         self.count = count

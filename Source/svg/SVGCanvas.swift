@@ -9,7 +9,7 @@ class SVGCanvas: Group {
 
     let layout: NodeLayout
 
-    public init(layout: NodeLayout, contents: [Node] = []) {
+    public init(layout: NodeLayout, contents: [MacawNode] = []) {
         self.layout = layout
         super.init(contents: contents)
     }

@@ -1,15 +1,15 @@
-open class Group: Node {
+open class Group: MacawNode {
 
-    open var contentsVar: AnimatableVariable<[Node]>
-    open var contents: [Node] {
+    open var contentsVar: AnimatableVariable<[MacawNode]>
+    open var contents: [MacawNode] {
         get { return contentsVar.value }
         set(val) {
             contentsVar.value = val
         }
     }
 
-    public init(contents: [Node] = [], place: Transform = Transform.identity, opaque: Bool = true, opacity: Double = 1, clip: Locus? = nil, mask: Node? = nil, effect: Effect? = nil, visible: Bool = true, tag: [String] = []) {
-        self.contentsVar = AnimatableVariable<[Node]>(contents)
+    public init(contents: [MacawNode] = [], place: Transform = Transform.identity, opaque: Bool = true, opacity: Double = 1, clip: Locus? = nil, mask: MacawNode? = nil, effect: Effect? = nil, visible: Bool = true, tag: [String] = []) {
+        self.contentsVar = AnimatableVariable<[MacawNode]>(contents)
         super.init(
             place: place,
             opaque: opaque,
@@ -27,7 +27,7 @@ open class Group: Node {
 
     // Searching
 
-    override public func nodeBy(tag: String) -> Node? {
+    override public func nodeBy(tag: String) -> MacawNode? {
         if let node = super.nodeBy(tag: tag) {
             return node
         }
@@ -41,8 +41,8 @@ open class Group: Node {
         return .none
     }
 
-    override public func nodesBy(tag: String) -> [Node] {
-        var result = [Node]()
+    override public func nodesBy(tag: String) -> [MacawNode] {
+        var result = [MacawNode]()
         contents.forEach { child in
             result.append(contentsOf: child.nodesBy(tag: tag))
         }
@@ -125,7 +125,7 @@ open class Group: Node {
     }
 }
 
-public extension Array where Element: Node {
+public extension Array where Element: MacawNode {
     func group( place: Transform = Transform.identity, opaque: Bool = true, opacity: Double = 1, clip: Locus? = nil, effect: Effect? = nil, visible: Bool = true, tag: [String] = []) -> Group {
         return Group(contents: self, place: place, opaque: opaque, opacity: opacity, clip: clip, effect: effect, visible: visible, tag: tag)
     }

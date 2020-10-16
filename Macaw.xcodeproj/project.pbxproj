@@ -224,7 +224,7 @@
 		57614B5D1F83D15600875933 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E1081E3B393900D1CB28 /* Variable.swift */; };
 		57614B5E1F83D15600875933 /* OpacityAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E1031E3B393900D1CB28 /* OpacityAnimation.swift */; };
 		57614B5F1F83D15600875933 /* Touchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F108731F502A3600DC365B /* Touchable.swift */; };
-		57614B601F83D15600875933 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E13A1E3B393900D1CB28 /* Node.swift */; };
+		57614B601F83D15600875933 /* MacawNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E13A1E3B393900D1CB28 /* MacawNode.swift */; };
 		57614B611F83D15600875933 /* PanEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E10B1E3B393900D1CB28 /* PanEvent.swift */; };
 		57614B621F83D15600875933 /* RotateEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E10D1E3B393900D1CB28 /* RotateEvent.swift */; };
 		57614B631F83D15600875933 /* Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E1281E3B393900D1CB28 /* Insets.swift */; };
@@ -317,7 +317,7 @@
 		57E5E19D1E3B393900D1CB28 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E1361E3B393900D1CB28 /* Transform.swift */; };
 		57E5E19E1E3B393900D1CB28 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E1381E3B393900D1CB28 /* Group.swift */; };
 		57E5E19F1E3B393900D1CB28 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E1391E3B393900D1CB28 /* Image.swift */; };
-		57E5E1A01E3B393900D1CB28 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E13A1E3B393900D1CB28 /* Node.swift */; };
+		57E5E1A01E3B393900D1CB28 /* MacawNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E13A1E3B393900D1CB28 /* MacawNode.swift */; };
 		57E5E1A11E3B393900D1CB28 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E13B1E3B393900D1CB28 /* Shape.swift */; };
 		57E5E1A21E3B393900D1CB28 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E13C1E3B393900D1CB28 /* Text.swift */; };
 		57E5E1A31E3B393900D1CB28 /* GroupRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5E13E1E3B393900D1CB28 /* GroupRenderer.swift */; };
@@ -937,7 +937,7 @@
 		57E5E1361E3B393900D1CB28 /* Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		57E5E1381E3B393900D1CB28 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		57E5E1391E3B393900D1CB28 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		57E5E13A1E3B393900D1CB28 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		57E5E13A1E3B393900D1CB28 /* MacawNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacawNode.swift; sourceTree = "<group>"; };
 		57E5E13B1E3B393900D1CB28 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		57E5E13C1E3B393900D1CB28 /* Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		57E5E13E1E3B393900D1CB28 /* GroupRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupRenderer.swift; sourceTree = "<group>"; };
@@ -1701,7 +1701,7 @@
 				57AF39881E66E06200F0BFE2 /* SceneUtils.swift */,
 				57E5E1381E3B393900D1CB28 /* Group.swift */,
 				57E5E1391E3B393900D1CB28 /* Image.swift */,
-				57E5E13A1E3B393900D1CB28 /* Node.swift */,
+				57E5E13A1E3B393900D1CB28 /* MacawNode.swift */,
 				57E5E13B1E3B393900D1CB28 /* Shape.swift */,
 				57E5E13C1E3B393900D1CB28 /* Text.swift */,
 			);
@@ -2798,7 +2798,7 @@
 				57614B5E1F83D15600875933 /* OpacityAnimation.swift in Sources */,
 				57614B5F1F83D15600875933 /* Touchable.swift in Sources */,
 				A7B47E3E230EA3F3009DD7E5 /* MCAMediaTimingFunctionName_iOS.swift in Sources */,
-				57614B601F83D15600875933 /* Node.swift in Sources */,
+				57614B601F83D15600875933 /* MacawNode.swift in Sources */,
 				A7B47E44230EA402009DD7E5 /* Graphics_iOS.swift in Sources */,
 				57614B611F83D15600875933 /* PanEvent.swift in Sources */,
 				57614B621F83D15600875933 /* RotateEvent.swift in Sources */,
@@ -2943,7 +2943,7 @@
 				3002331C20CC0BDD00EFD92D /* BoundsUtils.swift in Sources */,
 				5B6E193720AC58F900454E7E /* LineCap.swift in Sources */,
 				57F108741F502A3600DC365B /* Touchable.swift in Sources */,
-				57E5E1A01E3B393900D1CB28 /* Node.swift in Sources */,
+				57E5E1A01E3B393900D1CB28 /* MacawNode.swift in Sources */,
 				57E5E1751E3B393900D1CB28 /* PanEvent.swift in Sources */,
 				57E5E1771E3B393900D1CB28 /* RotateEvent.swift in Sources */,
 				57E5E18F1E3B393900D1CB28 /* Insets.swift in Sources */,

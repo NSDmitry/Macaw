@@ -20,7 +20,7 @@ open class SVGParser {
     /// - Returns: Root node of the corresponding Macaw scene.
     /// - Throws: An SVGParserError of no such file
     @available(*, deprecated)
-    open class func parse(bundle: Bundle, path: String, ofType: String = "svg") throws -> Node {
+    open class func parse(bundle: Bundle, path: String, ofType: String = "svg") throws -> MacawNode {
         guard let fullPath = bundle.path(forResource: path, ofType: ofType) else {
             throw SVGParserError.noSuchFile(path: "\(path).\(ofType)")
         }
@@ -36,7 +36,7 @@ open class SVGParser {
     /// - Returns: Root node of the corresponding Macaw scene.
     /// - Throws: An SVGParserError of no such file
     @available(*, deprecated)
-    open class func parse(path: String, ofType: String = "svg") throws -> Node {
+    open class func parse(path: String, ofType: String = "svg") throws -> MacawNode {
         return try SVGParser.parse(bundle: Bundle.main, path: path, ofType: ofType)
     }
 
@@ -52,7 +52,7 @@ open class SVGParser {
     open class func parse(resource: String,
                           ofType type: String = "svg",
                           inDirectory directory: String? = nil,
-                          fromBundle bundle: Bundle = Bundle.main) throws -> Node {
+                          fromBundle bundle: Bundle = Bundle.main) throws -> MacawNode {
         guard let fullpath = bundle.path(forResource: resource, ofType: type, inDirectory: directory) else {
             throw SVGParserError.noSuchFile(path: "\(resource).\(type)")
         }
@@ -64,7 +64,7 @@ open class SVGParser {
     /// - Parameter fullPath: Full path
     /// - Returns: Root node of the corresponding Macaw scene.
     /// - Throws: An SVGParserError of no such file
-    open class func parse(fullPath: String) throws -> Node {
+    open class func parse(fullPath: String) throws -> MacawNode {
         guard let text = try? String(contentsOfFile: fullPath, encoding: .utf8) else {
             throw SVGParserError.noSuchFile(path: fullPath)
         }
@@ -73,7 +73,7 @@ open class SVGParser {
 
     /// Parse the specified content of an SVG file.
     /// - returns: Root node of the corresponding Macaw scene.
-    open class func parse(text: String) throws -> Node {
+    open class func parse(text: String) throws -> MacawNode {
         return try SVGParser(text).parse()
     }
 
@@ -104,7 +104,7 @@ open class SVGParser {
     fileprivate let xmlString: String
     fileprivate let initialPosition: Transform
 
-    fileprivate var nodes = [Node]()
+    fileprivate var nodes = [MacawNode]()
     fileprivate var defNodes = [String: XMLIndexer]()
     fileprivate var defFills = [String: Fill]()
     fileprivate var defMasks = [String: UserSpaceNode]()
@@ -255,8 +255,8 @@ open class SVGParser {
                              yAlign: yAligningMode)
     }
 
-    fileprivate func parseNode(_ node: XMLIndexer, groupStyle: [String: String] = [:]) throws -> Node? {
-        var result: Node?
+    fileprivate func parseNode(_ node: XMLIndexer, groupStyle: [String: String] = [:]) throws -> MacawNode? {
+        var result: MacawNode?
         if let element = node.element {
             let style = getStyleAttributes(groupStyle, element: element)
             if style["display"] == "none" {
@@ -288,7 +288,7 @@ open class SVGParser {
         }
     }
 
-    fileprivate func parseElement(_ node: XMLIndexer, style: [String: String]) throws -> Node? {
+    fileprivate func parseElement(_ node: XMLIndexer, style: [String: String]) throws -> MacawNode? {
         if style["visibility"] == "hidden" {
             return .none
         }
@@ -466,7 +466,7 @@ open class SVGParser {
             contentUserSpace = false
         }
 
-        var contentNode: Node?
+        var contentNode: MacawNode?
         if pattern.children.isEmpty {
             if let parentPattern = parentPattern {
                 contentNode = parentPattern.content
@@ -494,7 +494,7 @@ open class SVGParser {
         guard let element = group.element else {
             return .none
         }
-        var groupNodes: [Node] = []
+        var groupNodes: [MacawNode] = []
         try group.children.forEach { child in
             if let node = try parseNode(child, groupStyle: style) {
                 groupNodes.append(node)
@@ -1028,7 +1028,7 @@ open class SVGParser {
                                fontName: String?,
                                fontSize: Int?,
                                fontWeight: String?,
-                               pos: Transform = Transform()) -> Node? {
+                               pos: Transform = Transform()) -> MacawNode? {
         guard let element = text.element else {
             return .none
         }
@@ -1105,7 +1105,7 @@ open class SVGParser {
     // REFACTOR
 
     fileprivate func collectTspans(_ tspan: String,
-                                   collectedTspans: [Node] = [],
+                                   collectedTspans: [MacawNode] = [],
                                    withWhitespace: Bool = false,
                                    textAnchor: String?,
                                    fill: Fill?,
@@ -1114,7 +1114,7 @@ open class SVGParser {
                                    fontName: String?,
                                    fontSize: Int?,
                                    fontWeight: String?,
-                                   bounds: Rect) -> [Node] {
+                                   bounds: Rect) -> [MacawNode] {
         let fullString = tspan.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) as NSString
         // exit recursion
         if fullString.isEqual(to: "") {
@@ -1217,7 +1217,7 @@ open class SVGParser {
                                 fontSize: Int?,
                                 fontWeight: String?,
                                 bounds: Rect,
-                                previousCollectedTspan: Node?) -> Text? {
+                                previousCollectedTspan: MacawNode?) -> Text? {
 
         guard let element = tspan.element else {
             return .none
@@ -1255,7 +1255,7 @@ open class SVGParser {
 
     fileprivate func getTspanPosition(_ element: SWXMLHash.XMLElement,
                                       bounds: Rect,
-                                      previousCollectedTspan: Node?,
+                                      previousCollectedTspan: MacawNode?,
                                       withWhitespace: inout Bool) -> Transform {
         var xPos: Double = bounds.x + bounds.w
         var yPos: Double = bounds.y
@@ -1296,7 +1296,7 @@ open class SVGParser {
 
     fileprivate func parseUse(_ use: XMLIndexer,
                               groupStyle: [String: String] = [:],
-                              place: Transform = .identity) throws -> Node? {
+                              place: Transform = .identity) throws -> MacawNode? {
         guard let element = use.element, let link = element.allAttributes["xlink:href"]?.text else {
             return .none
         }
@@ -1371,7 +1371,7 @@ open class SVGParser {
             return UserSpaceNode(node: node, userSpace: userSpace)
         }
 
-        var nodes = [Node]()
+        var nodes = [MacawNode]()
         try mask.children.forEach { indexer in
             let position = getPosition(indexer.element!)
             if let useNode = try parseUse(indexer, groupStyle: styles, place: position) {
@@ -1765,7 +1765,7 @@ open class SVGParser {
         return .none
     }
 
-    fileprivate func getMask(_ attributes: [String: String], locus: Locus?) throws -> Node? {
+    fileprivate func getMask(_ attributes: [String: String], locus: Locus?) throws -> MacawNode? {
         guard let maskName = attributes["mask"], let locus = locus else {
             return .none
         }
@@ -1824,7 +1824,7 @@ open class SVGParser {
         return .none
     }
 
-    fileprivate func copyNode(_ referenceNode: Node) -> Node? {
+    fileprivate func copyNode(_ referenceNode: MacawNode) -> MacawNode? {
         let pos = referenceNode.place
         let opaque = referenceNode.opaque
         let visible = referenceNode.visible
@@ -1868,7 +1868,7 @@ open class SVGParser {
                          tag: tag)
         }
         if let group = referenceNode as? Group {
-            var contents = [Node]()
+            var contents = [MacawNode]()
             group.contents.forEach { node in
                 if let copy = copyNode(node) {
                     contents.append(copy)
@@ -2162,22 +2162,22 @@ fileprivate class UserSpaceLocus {
 }
 
 fileprivate class UserSpaceNode {
-    let node: Node
+    let node: MacawNode
     let userSpace: Bool
 
-    init(node: Node, userSpace: Bool) {
+    init(node: MacawNode, userSpace: Bool) {
         self.node = node
         self.userSpace = userSpace
     }
 }
 
 fileprivate class UserSpacePattern {
-    let content: Node
+    let content: MacawNode
     let bounds: Rect
     let userSpace: Bool
     let contentUserSpace: Bool
 
-    init(content: Node, bounds: Rect, userSpace: Bool = false, contentUserSpace: Bool = true) {
+    init(content: MacawNode, bounds: Rect, userSpace: Bool = false, contentUserSpace: Bool = true) {
         self.content = content
         self.bounds = bounds
         self.userSpace = userSpace

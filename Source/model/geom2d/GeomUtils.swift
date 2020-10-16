@@ -8,12 +8,12 @@ open class GeomUtils {
         return t1.concat(with: t2)
     }
 
-    open class func centerRotation(node: Node, place: Transform, angle: Double) -> Transform {
+    open class func centerRotation(node: MacawNode, place: Transform, angle: Double) -> Transform {
         let center = GeomUtils.center(node: node)
         return GeomUtils.anchorRotation(node: node, place: place, anchor: center, angle: angle)
     }
 
-    open class func anchorRotation(node: Node, place: Transform, anchor: Point, angle: Double) -> Transform {
+    open class func anchorRotation(node: MacawNode, place: Transform, anchor: Point, angle: Double) -> Transform {
         let move = Transform.move(dx: anchor.x, dy: anchor.y)
 
         let asin = sin(angle); let acos = cos(angle)
@@ -31,12 +31,12 @@ open class GeomUtils {
         return result
     }
 
-    open class func centerScale(node: Node, sx: Double, sy: Double) -> Transform {
+    open class func centerScale(node: MacawNode, sx: Double, sy: Double) -> Transform {
         let center = GeomUtils.center(node: node)
         return Transform.move(dx: center.x * (1.0 - sx), dy: center.y * (1.0 - sy)).scale(sx: sx, sy: sy)
     }
 
-    open class func center(node: Node) -> Point {
+    open class func center(node: MacawNode) -> Point {
         guard let bounds = node.bounds else {
             return Point()
         }

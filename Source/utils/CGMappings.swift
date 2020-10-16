@@ -136,7 +136,7 @@ public extension CGAffineTransform {
     }
 }
 
-public extension Node {
+public extension MacawNode {
 
     func toNativeImage(size: Size, layout: ContentLayout = .of()) -> MImage {
         let renderer = RenderUtils.createNodeRenderer(self, view: nil)

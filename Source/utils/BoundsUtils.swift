@@ -42,7 +42,7 @@ final internal class BoundsUtils {
         }
     }
 
-    class func getNodesBounds(_ nodes: [Node]) -> Rect? {
+    class func getNodesBounds(_ nodes: [MacawNode]) -> Rect? {
         var union: Rect?
         nodes.forEach { node in
             guard let nodeBounds = node.bounds?.applying(node.place) else {
@@ -62,7 +62,7 @@ final internal class BoundsUtils {
         return Transform.move(dx: absoluteBounds.x, dy: absoluteBounds.y).concat(with: scale)
     }
 
-    class func createNodeFromRespectiveCoords(respectiveNode: Node, absoluteLocus: Locus) -> Node? {
+    class func createNodeFromRespectiveCoords(respectiveNode: MacawNode, absoluteLocus: Locus) -> MacawNode? {
         guard let copy = SceneUtils.copyNode(respectiveNode) else {
             return nil
         }
@@ -72,7 +72,7 @@ final internal class BoundsUtils {
             patternShape.place = patternShape.place.concat(with: tranform)
         }
         if let patternGroup = copy as? Group {
-            var nodes = [Node]()
+            var nodes = [MacawNode]()
             for groupNode in patternGroup.contents {
                 if let node = createNodeFromRespectiveCoords(respectiveNode: groupNode, absoluteLocus: absoluteLocus) {
                     nodes.append(node)

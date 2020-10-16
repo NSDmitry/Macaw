@@ -154,7 +154,7 @@ class AnimationUtils {
     }
 }
 
-extension Node {
+extension MacawNode {
 
     func isAnimating() -> Bool {
         return !animations.filter { $0.state() == AnimationState.running }.isEmpty

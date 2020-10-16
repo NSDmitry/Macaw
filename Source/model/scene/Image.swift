@@ -6,7 +6,7 @@ import AppKit
 import UIKit
 #endif
 
-open class Image: Node {
+open class Image: MacawNode {
 
     public let srcVar: Variable<String>
     open var src: String {
@@ -46,7 +46,7 @@ open class Image: Node {
 
     private var mImage: MImage?
 
-    public init(src: String, xAlign: Align = .min, yAlign: Align = .min, aspectRatio: AspectRatio = .none, w: Int = 0, h: Int = 0, place: Transform = Transform.identity, opaque: Bool = true, opacity: Double = 1, clip: Locus? = nil, mask: Node? = nil, effect: Effect? = nil, visible: Bool = true, tag: [String] = []) {
+    public init(src: String, xAlign: Align = .min, yAlign: Align = .min, aspectRatio: AspectRatio = .none, w: Int = 0, h: Int = 0, place: Transform = Transform.identity, opaque: Bool = true, opacity: Double = 1, clip: Locus? = nil, mask: MacawNode? = nil, effect: Effect? = nil, visible: Bool = true, tag: [String] = []) {
         self.srcVar = Variable<String>(src)
         self.xAlignVar = Variable<Align>(xAlign)
         self.yAlignVar = Variable<Align>(yAlign)

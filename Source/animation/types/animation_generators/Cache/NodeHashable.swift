@@ -1,6 +1,6 @@
 // TODO: Implement better hash
 
-public func == (lhs: Node, rhs: Node) -> Bool {
+public func == (lhs: MacawNode, rhs: MacawNode) -> Bool {
     return lhs === rhs
 }
 

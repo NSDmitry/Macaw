@@ -19,7 +19,7 @@ class ShapeRenderer: NodeRenderer {
         dispose()
     }
 
-    override var node: Node {
+    override var node: MacawNode {
         return shape
     }
 

@@ -1,6 +1,6 @@
-internal class ContentsAnimation: AnimationImpl<[Node]> {
+internal class ContentsAnimation: AnimationImpl<[MacawNode]> {
 
-    init(animatedGroup: Group, valueFunc: @escaping (Double) -> [Node], animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
+    init(animatedGroup: Group, valueFunc: @escaping (Double) -> [MacawNode], animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
 
         super.init(observableValue: animatedGroup.contentsVar, valueFunc: valueFunc, animationDuration: animationDuration, delay: delay, fps: fps)
         type = .contents
@@ -11,7 +11,7 @@ internal class ContentsAnimation: AnimationImpl<[Node]> {
         }
     }
 
-    init(animatedGroup: Group, factory: @escaping (() -> ((Double) -> [Node])), animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
+    init(animatedGroup: Group, factory: @escaping (() -> ((Double) -> [MacawNode])), animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
         super.init(observableValue: animatedGroup.contentsVar, factory: factory, animationDuration: animationDuration, delay: delay, fps: fps)
         type = .contents
         node = animatedGroup
@@ -22,9 +22,9 @@ internal class ContentsAnimation: AnimationImpl<[Node]> {
     }
 
     open override func reverse() -> Animation {
-        let factory = { () -> (Double) -> [Node] in
+        let factory = { () -> (Double) -> [MacawNode] in
             let original = self.timeFactory()
-            return { (t: Double) -> [Node] in
+            return { (t: Double) -> [MacawNode] in
                 original(1.0 - t)
             }
         }
@@ -40,32 +40,32 @@ internal class ContentsAnimation: AnimationImpl<[Node]> {
 
 public extension AnimatableVariable where T: ContentsInterpolation {
 
-    func animation(_ f: @escaping (Double) -> [Node]) -> Animation {
+    func animation(_ f: @escaping (Double) -> [MacawNode]) -> Animation {
         let group = node! as! Group
         return ContentsAnimation(animatedGroup: group, valueFunc: f, animationDuration: 1.0, delay: 0.0, autostart: false)
     }
 
-    func animation(_ f: @escaping ((Double) -> [Node]), during: Double = 1.0, delay: Double = 0.0) -> Animation {
+    func animation(_ f: @escaping ((Double) -> [MacawNode]), during: Double = 1.0, delay: Double = 0.0) -> Animation {
         let group = node! as! Group
         return ContentsAnimation(animatedGroup: group, valueFunc: f, animationDuration: during, delay: delay, autostart: false)
     }
 
-    func animation(during: Double = 1.0, delay: Double = 0.0, _ f: @escaping ((Double) -> [Node])) -> Animation {
+    func animation(during: Double = 1.0, delay: Double = 0.0, _ f: @escaping ((Double) -> [MacawNode])) -> Animation {
         let group = node! as! Group
         return ContentsAnimation(animatedGroup: group, valueFunc: f, animationDuration: during, delay: delay, autostart: false)
     }
 
-    func animate(_ f: @escaping (Double) -> [Node]) {
+    func animate(_ f: @escaping (Double) -> [MacawNode]) {
         let group = node! as! Group
         _ = ContentsAnimation(animatedGroup: group, valueFunc: f, animationDuration: 1.0, delay: 0.0, autostart: true)
     }
 
-    func animate(_ f: @escaping ((Double) -> [Node]), during: Double = 1.0, delay: Double = 0.0) {
+    func animate(_ f: @escaping ((Double) -> [MacawNode]), during: Double = 1.0, delay: Double = 0.0) {
         let group = node! as! Group
         _ = ContentsAnimation(animatedGroup: group, valueFunc: f, animationDuration: during, delay: delay, autostart: true)
     }
 
-    func animate(during: Double = 1.0, delay: Double = 0.0, _ f: @escaping ((Double) -> [Node])) {
+    func animate(during: Double = 1.0, delay: Double = 0.0, _ f: @escaping ((Double) -> [MacawNode])) {
         let group = node! as! Group
         _ = ContentsAnimation(animatedGroup: group, valueFunc: f, animationDuration: during, delay: delay, autostart: true)
     }

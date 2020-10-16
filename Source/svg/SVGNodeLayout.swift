@@ -42,7 +42,7 @@ protocol NodeLayout {
 
     func computeSize(parent: Size) -> Size
 
-    func layout(node: Node, in size: Size)
+    func layout(node: MacawNode, in size: Size)
 }
 
 class SVGNodeLayout: NodeLayout {
@@ -65,7 +65,7 @@ class SVGNodeLayout: NodeLayout {
         return svgSize.toPixels(total: parent)
     }
 
-    func layout(node: Node, in size: Size) {
+    func layout(node: MacawNode, in size: Size) {
         let svgSizeInPixels = svgSize.toPixels(total: size)
 
         if let viewBox = self.viewBox {

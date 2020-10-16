@@ -13,7 +13,7 @@ class ImageRenderer: NodeRenderer {
 
     var renderedPaths: [CGPath] = [CGPath]()
 
-    override var node: Node {
+    override var node: MacawNode {
         return image
     }
 

@@ -9,7 +9,7 @@ class GroupRenderer: NodeRenderer {
     var group: Group
     var renderers: [NodeRenderer] = []
 
-    override var node: Node {
+    override var node: MacawNode {
         return group
     }
 

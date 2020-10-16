@@ -313,7 +313,7 @@ open class SVGSerializer {
 
     fileprivate var maskCount: Int = 0
 
-    fileprivate func addMaskToDefs(_ mask: Node) {
+    fileprivate func addMaskToDefs(_ mask: MacawNode) {
         maskCount += 1
         defs += "<\(SVGMaskName) id=\"\(SVGMaskName)\(maskCount)\">" + serialize(node: mask) + SVGGenericCloseTag + "</\(SVGMaskName)>"
     }
@@ -333,7 +333,7 @@ open class SVGSerializer {
         return " clip-path=\"url(#\(SVGClipPathName)\(clipPathCount))\" "
     }
 
-    fileprivate func maskToSVG(_ mask: Node?) -> String {
+    fileprivate func maskToSVG(_ mask: MacawNode?) -> String {
         guard let mask = mask else {
             return ""
         }
@@ -354,7 +354,7 @@ open class SVGSerializer {
         return result
     }
 
-    fileprivate func serialize(node: Node) -> String {
+    fileprivate func serialize(node: MacawNode) -> String {
         if let shape = node as? Shape {
             return macawShapeToSvgShape(macawShape: shape)
         }
@@ -379,7 +379,7 @@ open class SVGSerializer {
         return "SVGUndefinedTag \(node)"
     }
 
-    fileprivate func serializeRootNode(node: Node) -> String {
+    fileprivate func serializeRootNode(node: MacawNode) -> String {
         var optionalSection = ""
         if let w = width {
             optionalSection += "width=\"\(w)\""
@@ -397,7 +397,7 @@ open class SVGSerializer {
         return result
     }
 
-    open class func serialize(node: Node, width: Int? = nil, height: Int? = nil, id: String? = nil) -> String {
+    open class func serialize(node: MacawNode, width: Int? = nil, height: Int? = nil, id: String? = nil) -> String {
         return SVGSerializer(width: width, height: height, id: id).serializeRootNode(node: node)
     }
 

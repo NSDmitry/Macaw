@@ -4,7 +4,7 @@ internal class TransformAnimation: AnimationImpl<Transform> {
 
     var trajectory: Path?
 
-    convenience init(animatedNode: Node, startValue: Transform, finalValue: Transform, animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
+    convenience init(animatedNode: MacawNode, startValue: Transform, finalValue: Transform, animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
 
         let interpolationFunc = { (t: Double) -> Transform in
             startValue.interpolate(finalValue, progress: t)
@@ -13,7 +13,7 @@ internal class TransformAnimation: AnimationImpl<Transform> {
         self.init(animatedNode: animatedNode, valueFunc: interpolationFunc, animationDuration: animationDuration, delay: delay, autostart: autostart, fps: fps)
     }
 
-    init(animatedNode: Node, valueFunc: @escaping (Double) -> Transform, animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
+    init(animatedNode: MacawNode, valueFunc: @escaping (Double) -> Transform, animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
         super.init(observableValue: animatedNode.placeVar, valueFunc: valueFunc, animationDuration: animationDuration, delay: delay, fps: fps)
         type = .affineTransformation
         node = animatedNode
@@ -23,7 +23,7 @@ internal class TransformAnimation: AnimationImpl<Transform> {
         }
     }
 
-    init(animatedNode: Node, factory: @escaping (() -> ((Double) -> Transform)), animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
+    init(animatedNode: MacawNode, factory: @escaping (() -> ((Double) -> Transform)), animationDuration: Double, delay: Double = 0.0, autostart: Bool = false, fps: UInt = 30) {
         super.init(observableValue: animatedNode.placeVar, factory: factory, animationDuration: animationDuration, delay: delay, fps: fps)
         type = .affineTransformation
         node = animatedNode
@@ -33,7 +33,7 @@ internal class TransformAnimation: AnimationImpl<Transform> {
         }
     }
 
-    init(animatedNode: Node, factory: @escaping (() -> ((Double) -> Transform)), along path: Path, animationDuration: Double = 1.0, delay: Double = 0.0, autostart: Bool = false) {
+    init(animatedNode: MacawNode, factory: @escaping (() -> ((Double) -> Transform)), along path: Path, animationDuration: Double = 1.0, delay: Double = 0.0, autostart: Bool = false) {
         super.init(observableValue: animatedNode.placeVar, factory: factory, animationDuration: animationDuration, delay: delay)
         type = .affineTransformation
         node = animatedNode

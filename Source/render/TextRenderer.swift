@@ -9,7 +9,7 @@ import AppKit
 class TextRenderer: NodeRenderer {
     var text: Text
 
-    override var node: Node {
+    override var node: MacawNode {
         return text
     }
 

@@ -19,11 +19,11 @@ public enum Relativity {
 }
 
 class NodePath {
-    let node: Node
+    let node: MacawNode
     let location: CGPoint
     let parent: NodePath?
 
-    init(node: Node, location: CGPoint, parent: NodePath? = nil) {
+    init(node: MacawNode, location: CGPoint, parent: NodePath? = nil) {
         self.node = node
         self.location = location
         self.parent = parent
@@ -62,7 +62,7 @@ public class TouchEvent: Event {
 
     public let points: [TouchPoint]
 
-    public init(node: Node, points: [TouchPoint]) {
+    public init(node: MacawNode, points: [TouchPoint]) {
         self.points = points
 
         super.init(node: node)

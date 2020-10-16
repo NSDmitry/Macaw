@@ -32,14 +32,14 @@ class SceneUtils {
         return shape
     }
 
-    static func copyNode(_ referenceNode: Node) -> Node? {
+    static func copyNode(_ referenceNode: MacawNode) -> MacawNode? {
         let pos = referenceNode.place
         let opaque = referenceNode.opaque
         let visible = referenceNode.visible
         let clip = referenceNode.clip
         let tag = referenceNode.tag
 
-        var result: Node?
+        var result: MacawNode?
 
         if let shape = referenceNode as? Shape {
             result = Shape(form: shape.form, fill: shape.fill, stroke: shape.stroke, place: pos, opaque: opaque, clip: clip, visible: visible, tag: tag)
@@ -51,7 +51,7 @@ class SceneUtils {
             result = Image(src: image.src, xAlign: image.xAlign, yAlign: image.yAlign, aspectRatio: image.aspectRatio, w: image.w, h: image.h, place: pos, opaque: opaque, clip: clip, visible: visible, tag: tag)
         }
         if let group = referenceNode as? Group {
-            var contents = [Node]()
+            var contents = [MacawNode]()
             group.contents.forEach { node in
                 if let copy = copyNode(node) {
                     contents.append(copy)

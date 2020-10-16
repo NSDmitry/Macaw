@@ -4,7 +4,7 @@ import UIKit
 import AppKit
 #endif
 
-open class Text: Node {
+open class Text: MacawNode {
 
     public let textVar: Variable<String>
     open var text: String {
@@ -48,7 +48,7 @@ open class Text: Node {
         set(val) { kerningVar.value = val }
     }
 
-    public init(text: String, font: Font? = nil, fill: Fill? = Color.black, stroke: Stroke? = nil, align: Align = .min, baseline: Baseline = .top, kerning: Float = 0.0, place: Transform = Transform.identity, opaque: Bool = true, opacity: Double = 1, clip: Locus? = nil, mask: Node? = nil, effect: Effect? = nil, visible: Bool = true, tag: [String] = []) {
+    public init(text: String, font: Font? = nil, fill: Fill? = Color.black, stroke: Stroke? = nil, align: Align = .min, baseline: Baseline = .top, kerning: Float = 0.0, place: Transform = Transform.identity, opaque: Bool = true, opacity: Double = 1, clip: Locus? = nil, mask: MacawNode? = nil, effect: Effect? = nil, visible: Bool = true, tag: [String] = []) {
         self.textVar = Variable<String>(text)
         self.fontVar = Variable<Font?>(font)
         self.fillVar = Variable<Fill?>(fill)

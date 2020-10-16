@@ -10,11 +10,11 @@ import Foundation
 
 open class Event {
 
-    public weak var node: Node?
+    public weak var node: MacawNode?
 
     var consumed = false
 
-    init(node: Node) {
+    init(node: MacawNode) {
         self.node = node
     }
 

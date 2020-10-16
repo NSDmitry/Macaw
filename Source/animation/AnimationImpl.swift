@@ -22,7 +22,7 @@ enum AnimationType {
 
 class BasicAnimation: Animation {
 
-    weak var node: Node? {
+    weak var node: MacawNode? {
         didSet {
             node?.animations.append(self)
             if let group = node as? Group {

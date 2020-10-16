@@ -10,7 +10,7 @@ let animationProducer = AnimationProducer()
 
 class AnimationProducer {
 
-    var storedAnimations = [Node: BasicAnimation]() // is used to make sure node is in view hierarchy before actually creating the animation
+    var storedAnimations = [MacawNode: BasicAnimation]() // is used to make sure node is in view hierarchy before actually creating the animation
     var delayedAnimations = [BasicAnimation: Timer]()
     var displayLink: MDisplayLinkProtocol?
 
@@ -198,11 +198,11 @@ class AnimationProducer {
     }
 
     // MARK: - Stored animation
-    func addStoredAnimations(_ node: Node, _ view: MacawView) {
+    func addStoredAnimations(_ node: MacawNode, _ view: MacawView) {
         addStoredAnimations(node, AnimationContext())
     }
 
-    func addStoredAnimations(_ node: Node, _ context: AnimationContext) {
+    func addStoredAnimations(_ node: MacawNode, _ context: AnimationContext) {
         if let animation = storedAnimations[node] {
             play(animation, context)
             storedAnimations.removeValue(forKey: node)

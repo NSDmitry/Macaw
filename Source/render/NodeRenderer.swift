@@ -67,11 +67,11 @@ class NodeRenderer {
         }
     }
 
-    open var node: Node {
+    open var node: MacawNode {
         fatalError("Unsupported")
     }
 
-    init(node: Node, view: MacawView?, parentRenderer: GroupRenderer? = nil) {
+    init(node: MacawNode, view: MacawView?, parentRenderer: GroupRenderer? = nil) {
         self.view = view
         self.parentRenderer = parentRenderer
 

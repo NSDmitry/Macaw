@@ -37,5 +37,5 @@ class AbsoluteUtils {
         return .none
     }
 
-    private static var indexCache = [Node: Int]()
+    private static var indexCache = [MacawNode: Int]()
 }

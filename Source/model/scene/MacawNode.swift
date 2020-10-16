@@ -1,6 +1,6 @@
 import Foundation
 
-open class Node: Drawable {
+open class MacawNode: Drawable {
 
     public let placeVar: AnimatableVariable<Transform>
     open var place: Transform {
@@ -26,8 +26,8 @@ open class Node: Drawable {
         set(val) { clipVar.value = val }
     }
 
-    public let maskVar: Variable<Node?>
-    open var mask: Node? {
+    public let maskVar: Variable<MacawNode?>
+    open var mask: MacawNode? {
         get { return maskVar.value }
         set(val) { maskVar.value = val }
     }
@@ -41,7 +41,7 @@ open class Node: Drawable {
     var animations: [BasicAnimation] = []
 
     // MARK: - Searching
-    public func nodeBy(tag: String) -> Node? {
+    public func nodeBy(tag: String) -> MacawNode? {
         if self.tag.contains(tag) {
             return self
         }
@@ -49,7 +49,7 @@ open class Node: Drawable {
         return .none
     }
 
-    public func nodesBy(tag: String) -> [Node] {
+    public func nodesBy(tag: String) -> [MacawNode] {
         return [nodeBy(tag: tag)].compactMap { $0 }
     }
 
@@ -289,12 +289,12 @@ open class Node: Drawable {
         return !pinchHandlers.isEmpty
     }
 
-    public init(place: Transform = Transform.identity, opaque: Bool = true, opacity: Double = 1, clip: Locus? = nil, mask: Node? = nil, effect: Effect? = nil, visible: Bool = true, tag: [String] = []) {
+    public init(place: Transform = Transform.identity, opaque: Bool = true, opacity: Double = 1, clip: Locus? = nil, mask: MacawNode? = nil, effect: Effect? = nil, visible: Bool = true, tag: [String] = []) {
         self.placeVar = AnimatableVariable<Transform>(place)
         self.opaqueVar = Variable<Bool>(opaque)
         self.opacityVar = AnimatableVariable<Double>(opacity)
         self.clipVar = Variable<Locus?>(clip)
-        self.maskVar = Variable<Node?>(mask)
+        self.maskVar = Variable<MacawNode?>(mask)
         self.effectVar = Variable<Effect?>(effect)
 
         super.init(
@@ -318,7 +318,7 @@ open class Node: Drawable {
     }
 
     override open func isEqual(_ object: Any?) -> Bool {
-        guard let object = object as? Node else {
+        guard let object = object as? MacawNode else {
             return false
         }
         return Unmanaged.passUnretained(self).toOpaque() == Unmanaged.passUnretained(object).toOpaque()
