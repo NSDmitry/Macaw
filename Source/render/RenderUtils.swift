@@ -21,7 +21,7 @@ class RenderUtils {
             return GroupRenderer(group: group, view: view, parentRenderer: parentRenderer)
         } else if let shape = node as? Shape {
             return ShapeRenderer(shape: shape, view: view, parentRenderer: parentRenderer)
-        } else if let text = node as? Text {
+        } else if let text = node as? MacawText {
             return TextRenderer(text: text, view: view, parentRenderer: parentRenderer)
         } else if let image = node as? Image {
             return ImageRenderer(image: image, view: view, parentRenderer: parentRenderer)

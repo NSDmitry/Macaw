@@ -163,7 +163,7 @@ open class SVGSerializer {
         return ""
     }
 
-    fileprivate func textToSVG(_ text: Text) -> String {
+    fileprivate func textToSVG(_ text: MacawText) -> String {
         var result = tag(SVGTextOpenTag)
         result += idToSVG(text.tag)
         if let font = text.font {
@@ -373,7 +373,7 @@ open class SVGSerializer {
         if let image = node as? Image {
             return imageToSVG(image)
         }
-        if let text = node as? Text {
+        if let text = node as? MacawText {
             return textToSVG(text)
         }
         return "SVGUndefinedTag \(node)"

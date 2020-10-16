@@ -1086,20 +1086,20 @@ open class SVGParser {
                                      fontName: String?,
                                      fontSize: Int?,
                                      fontWeight: String?,
-                                     pos: Transform = Transform()) -> Text? {
+                                     pos: Transform = Transform()) -> MacawText? {
         let string = text.text
         let position = pos.move(dx: getDoubleValue(text, attribute: "x") ?? 0,
                                 dy: getDoubleValue(text, attribute: "y") ?? 0)
 
-        return Text(text: string,
-                    font: getFont(fontName: fontName, fontWeight: fontWeight, fontSize: fontSize),
-                    fill: fill,
-                    stroke: stroke,
-                    align: anchorToAlign(textAnchor),
-                    baseline: .bottom,
-                    place: position,
-                    opacity: opacity,
-                    tag: getTag(text))
+        return MacawText(text: string,
+                         font: getFont(fontName: fontName, fontWeight: fontWeight, fontSize: fontSize),
+                         fill: fill,
+                         stroke: stroke,
+                         align: anchorToAlign(textAnchor),
+                         baseline: .bottom,
+                         place: position,
+                         opacity: opacity,
+                         tag: getTag(text))
     }
 
     // REFACTOR
@@ -1183,13 +1183,13 @@ open class SVGParser {
             nextStringWhitespace = true
         }
         trimmedString = withWhitespace ? " \(trimmedString)" : trimmedString
-        let text = Text(text: trimmedString,
-                        font: getFont(fontName: fontName, fontWeight: fontWeight, fontSize: fontSize),
-                        fill: fill,
-                        stroke: stroke,
-                        align: anchorToAlign(textAnchor),
-                        baseline: .alphabetic,
-                        place: Transform().move(dx: bounds.x + bounds.w, dy: bounds.y), opacity: opacity)
+        let text = MacawText(text: trimmedString,
+                             font: getFont(fontName: fontName, fontWeight: fontWeight, fontSize: fontSize),
+                             fill: fill,
+                             stroke: stroke,
+                             align: anchorToAlign(textAnchor),
+                             baseline: .alphabetic,
+                             place: Transform().move(dx: bounds.x + bounds.w, dy: bounds.y), opacity: opacity)
         collection.append(text)
         if tagRange.location >= fullString.length { // leave recursion
             return collection
@@ -1217,7 +1217,7 @@ open class SVGParser {
                                 fontSize: Int?,
                                 fontWeight: String?,
                                 bounds: Rect,
-                                previousCollectedTspan: MacawNode?) -> Text? {
+                                previousCollectedTspan: MacawNode?) -> MacawText? {
 
         guard let element = tspan.element else {
             return .none
@@ -1232,15 +1232,15 @@ open class SVGParser {
         let text = shouldAddWhitespace ? " \(string)" : string
         let attributes = getStyleAttributes([:], element: element)
 
-        return Text(text: text,
-                    font: getFont(attributes, fontName: fontName, fontWeight: fontWeight, fontSize: fontSize),
-                    fill: (attributes[SVGKeys.fill] != nil) ? getFillColor(attributes)! : fill,
-                    stroke: stroke ?? getStroke(attributes),
-                    align: anchorToAlign(textAnchor ?? getTextAnchor(attributes)),
-                    baseline: .alphabetic,
-                    place: pos,
-                    opacity: getOpacity(attributes),
-                    tag: getTag(element))
+        return MacawText(text: text,
+                         font: getFont(attributes, fontName: fontName, fontWeight: fontWeight, fontSize: fontSize),
+                         fill: (attributes[SVGKeys.fill] != nil) ? getFillColor(attributes)! : fill,
+                         stroke: stroke ?? getStroke(attributes),
+                         align: anchorToAlign(textAnchor ?? getTextAnchor(attributes)),
+                         baseline: .alphabetic,
+                         place: pos,
+                         opacity: getOpacity(attributes),
+                         tag: getTag(element))
     }
 
     fileprivate func getFont(_ attributes: [String: String] = [:],
@@ -1841,18 +1841,18 @@ open class SVGParser {
                          visible: visible,
                          tag: tag)
         }
-        if let text = referenceNode as? Text {
-            return Text(text: text.text,
-                        font: text.font,
-                        fill: text.fill,
-                        stroke: text.stroke,
-                        align: text.align,
-                        baseline: text.baseline,
-                        place: pos,
-                        opaque: opaque,
-                        clip: clip,
-                        visible: visible,
-                        tag: tag)
+        if let text = referenceNode as? MacawText {
+            return MacawText(text: text.text,
+                             font: text.font,
+                             fill: text.fill,
+                             stroke: text.stroke,
+                             align: text.align,
+                             baseline: text.baseline,
+                             place: pos,
+                             opaque: opaque,
+                             clip: clip,
+                             visible: visible,
+                             tag: tag)
         }
         if let image = referenceNode as? Image {
             return Image(src: image.src,

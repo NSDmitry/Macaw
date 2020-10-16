@@ -4,7 +4,7 @@ import UIKit
 import AppKit
 #endif
 
-open class Text: MacawNode {
+open class MacawText: MacawNode {
 
     public let textVar: Variable<String>
     open var text: String {
